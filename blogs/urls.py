@@ -8,4 +8,6 @@ app_name = 'blogs'
 urlpatterns = [
     #Home page
     path('', views.index, name='index'),
+    #Page for adding a new blog
+    path('new_blog/', views.new_blog, name="new_blog"),
 ]
