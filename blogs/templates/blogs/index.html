@@ -6,16 +6,22 @@
 
 <ul>
     {% for post in posts %}
-    <li>
-        <p>{{ post.title }}</p>
-        <p>{{ post.text }}</p>
-    </li>
-    {% empty %}
-    <li>No Posts have been made yet</li>
-    {% endfor %}
-</ul>
+        <li>
+            <p>{{ post.title }}</p>
+            <p>{{ post.text }}</p>
+            <p>
+            <a href="{% url 'blogs:edit_blog' post.id %}">edit post</a>
+            </p>
+        </li>
+        {% empty %}
+        <li>No posts have been added yet.</li>
+        {% endfor %} 
 
-<a href="{% url 'blogs:new_blog' %}">Add a new post</a>
+</ul>
+  <a href="{% url 'blogs:new_blog' %}">Add a new post:</a>
+    
 
 
 {% endblock content %}
+
+
