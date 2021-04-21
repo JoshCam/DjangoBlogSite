@@ -7,7 +7,7 @@ from .forms import BlogForm
 # Create your views here.
 def index(request):
     '''The home page for blog and shows all posts'''
-    posts = BlogPost.objects.order_by('date_added')
+    posts = BlogPost.objects.order_by('-date_added')
     context = {'posts': posts}
     return render(request, 'blogs/index.html', context)
 
@@ -21,7 +21,9 @@ def new_blog(request):
         # POST data received, process data
         form = BlogForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            new_blog = form.save(commit=False)
+            new_blog.owner = request.user
+            new_blog.save()
             return redirect('blogs:index')
 
     #display a blank or invalid form.

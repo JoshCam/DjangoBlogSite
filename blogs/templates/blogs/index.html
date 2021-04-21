@@ -3,12 +3,14 @@
 {% block content%}
 
 <p>Posts</p>
-
+<a href="{% url 'blogs:new_blog' %}">Add a new post:</a>
 <ul>
     {% for post in posts %}
         <li>
             <p>{{ post.title }}</p>
             <p>{{ post.text }}</p>
+            <p>posted by: {{ post.owner }}</p>
+            <p>{{ post.date_added }}</p>
             <p>
             <a href="{% url 'blogs:edit_blog' post.id %}">edit post</a>
             </p>
@@ -18,7 +20,6 @@
         {% endfor %} 
 
 </ul>
-  <a href="{% url 'blogs:new_blog' %}">Add a new post:</a>
     
 
 
