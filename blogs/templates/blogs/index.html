@@ -1,27 +1,33 @@
 {% extends "blogs/base.html" %}
 
+{% block pageheader %}
+    <h3>Posts</h3>
+{% endblock pageheader %}
+
+
 {% block content%}
-
-<p>Posts</p>
-<a href="{% url 'blogs:new_blog' %}">Add a new post:</a>
-<ul>
+    <p>
+        <a href="{% url 'blogs:new_blog' %}">Add a new post:</a>
+    </p>
     {% for post in posts %}
-        <li>
-            <p>{{ post.title }}</p>
-            <p>{{ post.text }}</p>
-            <p>posted by: {{ post.owner }}</p>
-            <p>{{ post.date_added }}</p>
-            <p>
-            <a href="{% url 'blogs:edit_blog' post.id %}">edit post</a>
-            </p>
-        </li>
-        {% empty %}
+    <div class="card mb-3">
+        <h4 class="card-header">
+            {{ post.title }}
+            <small>
+                {{ post.date_added|date:'M d, Y H:i' }}
+                {{ post.owner }}
+            </small>
+        </h4>
+        <div class="card-body">
+            {{ post.text|linebreaks }}
+            <small>
+                <a href="{% url 'blogs:edit_blog' post.id %}">edit post</a>
+            </small>
+        </div>
+    </div>
+    {% empty %}
         <li>No posts have been added yet.</li>
-        {% endfor %} 
-
-</ul>
-    
-
+    {% endfor %}
 
 {% endblock content %}
 
